@@ -7,6 +7,12 @@ from .models import *
 class Lp(generic.TemplateView):
     template_name = 'mamozon/lp.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(Lp, self).get_context_data(**kwargs)
+        all_items = Product.objects.all()
+        context['items'] = all_items
+        return context
+
 class ItemList(generic.ListView):
     model = Product
     template_name = 'mamozon/item_list.html'
