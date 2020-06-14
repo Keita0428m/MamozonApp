@@ -71,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mamoDjango.wsgi.application'
 
+AUTH_USER_MODEL ='mamozon.user'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
