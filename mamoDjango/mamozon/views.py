@@ -3,6 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import generic 
 from .models import * 
+from django.contrib.auth.views import LoginView 
+from .forms import * 
 
 class Lp(generic.TemplateView):
     template_name = 'mamozon/lp.html'
@@ -27,3 +29,8 @@ class ItemList(generic.ListView):
 class ItemDetail(generic.DetailView):
     model = Product
     template_name = 'mamozon/item_detail.html'
+
+class Login(LoginView):
+    """ログインページ"""
+    form_class = LoginForm
+    template_name = 'mamozon/login.html'

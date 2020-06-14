@@ -123,3 +123,7 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media') # 追加
 MEDIA_URL = '/media_mamoDjango/' # 追加  
+
+LOGIN_URL = 'mamozon:login'
+LOGIN_REDIRECT_URL = 'mamozon:lp'
+LOGOUT_REDIRECT_URL = 'mamozon:lp'
