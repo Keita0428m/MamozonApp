@@ -127,3 +127,5 @@ MEDIA_URL = '/media_mamoDjango/' # 追加
 LOGIN_URL = 'mamozon:login'
 LOGIN_REDIRECT_URL = 'mamozon:lp'
 LOGOUT_REDIRECT_URL = 'mamozon:lp'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
