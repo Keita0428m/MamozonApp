@@ -13,7 +13,9 @@ from django.template.loader import get_template
 from django.contrib import messages 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import ModelFormMixin
 
+# Top Page
 class Lp(generic.TemplateView):
     template_name = 'mamozon/lp.html'
 
@@ -23,6 +25,7 @@ class Lp(generic.TemplateView):
         context['items'] = all_items
         return context
 
+# 商品リスト
 class ItemList(generic.ListView):
     model = Product
     template_name = 'mamozon/item_list.html'
@@ -34,9 +37,27 @@ class ItemList(generic.ListView):
             products = products.filter(name__icontains = q)
         return products
 
-class ItemDetail(generic.DetailView):
+# 商品詳細
+class ItemDetail(ModelFormMixin, generic.DetailView):
     model = Product
+    form_class = ReviewForm
     template_name = 'mamozon/item_detail.html'
+
+    # create review if valid
+    def form_valid(self, form):
+        review = form.save(commit=False)
+        review.product = self.get_object()
+        review.user = self.request.user
+        review.save()
+        return HttpResponseRedirect(self.request.path_info)
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            self.object = self.get_object()
+            return self.form_invalid(form)
 
 class Login(LoginView):
     """ログインページ"""
