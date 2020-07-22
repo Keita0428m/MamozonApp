@@ -1,3 +1,1 @@
-web: gunicorn mamoDjango.wsgi:application --log-file - --log-level debug
-python manage.py collectstatic --noinput
-manage.py migrate
+web: gunicorn --env DJANGO_SETTINGS_MODULE=mamoDjango.settings mamoDjango.wsgi --log-file -
