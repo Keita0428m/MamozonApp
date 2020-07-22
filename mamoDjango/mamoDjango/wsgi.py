@@ -16,3 +16,6 @@ application = get_wsgi_application()
 # Herokuデプロイのための追記
 from whitenoise.django import DjangoWhiteNoise
 application = DjangoWhiteNoise(application)
+
+sys.path.append('/mamoDjango/mamozon')
+sys.path.append('/mamoDjango/mamoDjango/mamozon')
